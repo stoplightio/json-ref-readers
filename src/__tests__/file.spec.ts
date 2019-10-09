@@ -1,5 +1,5 @@
-import { resolveFile } from '../file';
 import { readFile } from 'fs';
+import { resolveFile } from '../file';
 
 jest.mock('fs');
 
