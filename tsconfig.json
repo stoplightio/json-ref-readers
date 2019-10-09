@@ -1,0 +1,10 @@
+{
+  "extends": "@stoplight/scripts/tsconfig.json",
+
+  // target all ts files
+  "include": ["."],
+
+  "compilerOptions": {
+    "noUnusedLocals": false
+  }
+}
