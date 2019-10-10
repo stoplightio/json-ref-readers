@@ -18,7 +18,7 @@
     "url": "https://github.com/stoplightio/ref-resolvers.git"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc",
     "lint": "tslint -p .",
     "lint.fix": "yarn lint --fix",
     "release": "tsc && semantic-release",

@@ -1,10 +1,8 @@
 {
   "extends": "@stoplight/scripts/tsconfig.json",
-
-  // target all ts files
   "include": ["."],
-
+  "exclude": ["**/__*__/**"],
   "compilerOptions": {
-    "noUnusedLocals": false
+    "outDir": "dist"
   }
 }
