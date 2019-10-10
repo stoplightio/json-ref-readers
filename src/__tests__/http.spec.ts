@@ -11,7 +11,7 @@ describe('resolveHttp()', () => {
 });
 
 describe('createResolveHttp()', () => {
-  it('works', async () => {
+  it('allows to pass custom RequestInit', async () => {
     ((fetch as unknown) as jest.Mock).mockImplementation(() => ({ text: jest.fn(() => 'test') }));
 
     await createResolveHttp({ headers: { myLovelyHeader: 'test' } })({
