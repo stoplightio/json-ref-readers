@@ -1,10 +1,10 @@
-# ref-resolvers
-Set of utilities for resolving external json references.
+# json-ref-readers
+Set of utilities for reading external json references.
 
 ## Installation
 
 ```bash
-yarn add @stoplight/ref-resolvers
+yarn add @stoplight/json-ref-readers
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ The library exports two functions: `resolveHttp` and `resolveFile`. Both take `u
 
 ```ts
 import { Resolver } from '@stoplight/json-ref-resolver';
-import { resolveFile, resolveHttp } from '@stoplight/ref-resolvers';
+import { resolveFile, resolveHttp } from '@stoplight/json-ref-readers';
 
 const httpAndFileResolver = new Resolver({
   resolvers: {

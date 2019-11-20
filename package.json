@@ -1,7 +1,7 @@
 {
-  "name": "@stoplight/ref-resolvers",
+  "name": "@stoplight/json-ref-readers",
   "version": "0.0.0",
-  "description": "Set of utilities for resolving external json references",
+  "description": "Set of utilities for reading external json references",
   "files": [
     "dist"
   ],
@@ -10,12 +10,12 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "homepage": "https://github.com/stoplightio/ref-resolvers",
-  "bugs": "https://github.com/stoplightio/ref-resolvers/issues",
+  "homepage": "https://github.com/stoplightio/json-ref-readers",
+  "bugs": "https://github.com/stoplightio/json-ref-readers/issues",
   "author": "Stoplight <support@stoplight.io>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stoplightio/ref-resolvers.git"
+    "url": "https://github.com/stoplightio/json-ref-readers.git"
   },
   "scripts": {
     "build": "tsc",
