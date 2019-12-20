@@ -1,6 +1,6 @@
 import * as nock from 'nock';
 import * as URI from 'urijs';
-import { createResolveHttp, resolveHttp } from '../http';
+import { createResolveHttp, NetworkError, OpenError, resolveHttp } from '../http';
 
 describe('resolveHttp()', () => {
   afterAll(() => {
@@ -15,12 +15,24 @@ describe('resolveHttp()', () => {
     return expect(resolveHttp(new URI('http://stoplight.io'))).resolves.toEqual('test');
   });
 
-  it('given a network error, throws', () => {
+  it('given a 404 network error, throws OpenError', () => {
     nock('https://stoplight.io')
       .get('/')
       .reply(404);
 
-    return expect(resolveHttp(new URI('http://stoplight.io'))).rejects.toThrowError('404 Not Found');
+    return expect(resolveHttp(new URI('http://stoplight.io'))).rejects.toStrictEqual(
+      new OpenError('Page not found: http://stoplight.io/'),
+    );
+  });
+
+  it('given a network error, throws NetworkError', () => {
+    nock('https://stoplight.io')
+      .get('/')
+      .reply(500);
+
+    return expect(resolveHttp(new URI('http://stoplight.io'))).rejects.toStrictEqual(
+      new NetworkError('500 Internal Server Error'),
+    );
   });
 });
 
