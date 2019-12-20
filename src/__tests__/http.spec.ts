@@ -1,23 +1,44 @@
-import fetch from 'node-fetch';
+import * as nock from 'nock';
+import * as URI from 'urijs';
 import { createResolveHttp, resolveHttp } from '../http';
 
-jest.mock('node-fetch');
-
 describe('resolveHttp()', () => {
+  afterAll(() => {
+    nock.cleanAll();
+  });
+
   it('works', async () => {
-    ((fetch as unknown) as jest.Mock).mockImplementation(() => ({ text: jest.fn(() => 'test') }));
-    await expect(resolveHttp({ toString: () => 'http://stoplight.io' } as uri.URI)).resolves.toEqual('test');
+    nock('https://stoplight.io')
+      .get('/')
+      .reply(200, 'test');
+
+    await expect(resolveHttp(new URI('http://stoplight.io'))).resolves.toEqual('test');
+  });
+
+  it('handles network errors', async () => {
+    nock('https://stoplight.io')
+      .get('/')
+      .reply(404);
+
+    await expect(resolveHttp(new URI('http://stoplight.io'))).rejects.toThrowError('404 Not Found');
   });
 });
 
 describe('createResolveHttp()', () => {
+  afterAll(() => {
+    nock.cleanAll();
+  });
+
   it('allows to pass custom RequestInit', async () => {
-    ((fetch as unknown) as jest.Mock).mockImplementation(() => ({ text: jest.fn(() => 'test') }));
+    nock('https://stoplight.io')
+      .get('/')
+      .basicAuth({ user: 'john', pass: 'doe' })
+      .reply(200, 'test');
 
-    await createResolveHttp({ headers: { myLovelyHeader: 'test' } })({
-      toString: () => 'http://stoplight.io',
-    } as uri.URI);
+    const resolve = createResolveHttp({
+      headers: { Authorization: `Basic ${Buffer.from('john:doe').toString('base64')}` },
+    });
 
-    expect(fetch).toHaveBeenCalledWith('http://stoplight.io', { headers: { myLovelyHeader: 'test' } });
+    await expect(resolve(new URI('http://stoplight.io'))).resolves.toEqual('test');
   });
 });
