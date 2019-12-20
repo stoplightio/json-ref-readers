@@ -7,20 +7,20 @@ describe('resolveHttp()', () => {
     nock.cleanAll();
   });
 
-  it('works', async () => {
+  it('works', () => {
     nock('https://stoplight.io')
       .get('/')
       .reply(200, 'test');
 
-    await expect(resolveHttp(new URI('http://stoplight.io'))).resolves.toEqual('test');
+    return expect(resolveHttp(new URI('http://stoplight.io'))).resolves.toEqual('test');
   });
 
-  it('handles network errors', async () => {
+  it('given a network error, throws', () => {
     nock('https://stoplight.io')
       .get('/')
       .reply(404);
 
-    await expect(resolveHttp(new URI('http://stoplight.io'))).rejects.toThrowError('404 Not Found');
+    return expect(resolveHttp(new URI('http://stoplight.io'))).rejects.toThrowError('404 Not Found');
   });
 });
 
@@ -29,7 +29,7 @@ describe('createResolveHttp()', () => {
     nock.cleanAll();
   });
 
-  it('allows to pass custom RequestInit', async () => {
+  it('allows to pass custom RequestInit', () => {
     nock('https://stoplight.io')
       .get('/')
       .basicAuth({ user: 'john', pass: 'doe' })
@@ -39,6 +39,6 @@ describe('createResolveHttp()', () => {
       headers: { Authorization: `Basic ${Buffer.from('john:doe').toString('base64')}` },
     });
 
-    await expect(resolve(new URI('http://stoplight.io'))).resolves.toEqual('test');
+    return expect(resolve(new URI('http://stoplight.io'))).resolves.toEqual('test');
   });
 });
