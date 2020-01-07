@@ -1,4 +1,4 @@
-import fetch, { RequestInit } from 'node-fetch';
+import { fetch } from 'cross-fetch';
 
 export class OpenError extends Error {
   public readonly name = 'OpenError';

@@ -28,13 +28,12 @@
     "test.update": "yarn test --updateSnapshot"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "cross-fetch": "^3.0.4"
   },
   "devDependencies": {
     "@stoplight/scripts": "^7.0.3",
     "@types/jest": "^24.0.18",
     "@types/nock": "^11.1.0",
-    "@types/node-fetch": "^2.5.2",
     "@types/urijs": "^1.19.4",
     "jest": "^24.9.0",
     "nock": "^11.7.0",
