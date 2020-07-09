@@ -1,4 +1,5 @@
 import fetch, { RequestInit } from 'node-fetch';
+import * as URI from 'urijs';
 
 export class OpenError extends Error {
   public readonly name = 'OpenError';
@@ -8,7 +9,7 @@ export class NetworkError extends Error {
   public readonly name = 'ReadError';
 }
 
-export async function resolveHttp(ref: uri.URI, opts: RequestInit = {}) {
+export async function resolveHttp(ref: URI, opts: RequestInit = {}) {
   const uri = ref.href();
   const response = await fetch(uri, opts);
   if (response.ok) {
