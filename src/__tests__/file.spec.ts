@@ -1,6 +1,6 @@
 import { readFile } from 'fs';
-import { resolveFile } from '../file';
 import * as URI from 'urijs';
+import { resolveFile } from '../file';
 
 jest.mock('fs');
 

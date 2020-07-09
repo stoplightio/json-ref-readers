@@ -19,10 +19,10 @@
     "url": "https://github.com/stoplightio/json-ref-readers.git"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "sl-scripts build",
     "lint": "tslint -p .",
     "lint.fix": "yarn lint --fix",
-    "release": "tsc && semantic-release",
+    "release": "sl-scripts release",
     "test": "jest",
     "test.prod": "yarn lint && yarn test --coverage --no-cache",
     "test.update": "yarn test --updateSnapshot"
@@ -31,7 +31,7 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "@stoplight/scripts": "^7.0.3",
+    "@stoplight/scripts": "^8.2.1",
     "@types/jest": "^24.0.18",
     "@types/nock": "^11.1.0",
     "@types/node-fetch": "^2.5.2",
