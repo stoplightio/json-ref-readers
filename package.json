@@ -28,7 +28,8 @@
     "test.update": "yarn test --updateSnapshot"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "tslib": "^1.14.1"
   },
   "devDependencies": {
     "@stoplight/scripts": "^8.2.1",
