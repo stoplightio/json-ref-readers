@@ -5,7 +5,7 @@ import { resolveFile } from '../file';
 describe('resolveFile()', () => {
   it('works', async () => {
     const uri = new URI(path.join(__dirname, '__fixtures__/test.json'));
-    await expect(resolveFile(uri)).resolves.toEqual('{}\n');
+    await expect(resolveFile(uri)).resolves.toMatch(/^{\}/);
   });
 
   it('handles failures', async () => {
