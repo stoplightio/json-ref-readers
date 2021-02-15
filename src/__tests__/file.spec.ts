@@ -1,17 +1,15 @@
-import { readFile } from 'fs';
+import * as path from 'path';
 import * as URI from 'urijs';
 import { resolveFile } from '../file';
 
-jest.mock('fs');
-
 describe('resolveFile()', () => {
   it('works', async () => {
-    ((readFile as unknown) as jest.Mock).mockImplementation((_, __, cb) => cb(undefined, 'root:*'));
-    await expect(resolveFile({ path: () => '/etc/passwd' } as URI)).resolves.toEqual('root:*');
+    const uri = new URI(path.join(__dirname, '__fixtures__/test.json'));
+    await expect(resolveFile(uri)).resolves.toEqual('{}\n');
   });
 
   it('handles failures', async () => {
-    ((readFile as unknown) as jest.Mock).mockImplementation((_, __, cb) => cb(new Error('Using shadow, ha, ha')));
-    await expect(resolveFile({ path: () => '/etc/passwd' } as URI)).rejects.toThrowError('Using shadow, ha, ha');
+    const uri = new URI(path.join(__dirname, '__fixtures__/baz.json'));
+    await expect(resolveFile(uri)).rejects.toThrowError();
   });
 });
